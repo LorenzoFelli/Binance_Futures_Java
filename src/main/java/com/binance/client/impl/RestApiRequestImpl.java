@@ -699,6 +699,21 @@ class RestApiRequestImpl {
         return request;
     }
 
+    RestApiRequest<ResponseResult> cancelAllOpenOrders(String symbol) {
+        RestApiRequest<ResponseResult> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol);            
+        request.request = createRequestByDeleteWithSignature("/fapi/v1/allOpenOrders", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            ResponseResult result = new ResponseResult();
+            result.setCode(jsonWrapper.getInteger("code"));
+            result.setMsg(jsonWrapper.getString("msg"));
+            return result;
+        });
+        return request;
+    }
+    
     RestApiRequest<Order> getOrder(String symbol, Long orderId, String origClientOrderId) {
         RestApiRequest<Order> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()

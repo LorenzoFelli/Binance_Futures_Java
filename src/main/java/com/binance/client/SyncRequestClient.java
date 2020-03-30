@@ -168,6 +168,13 @@ public interface SyncRequestClient {
     Order cancelOrder(String symbol, Long orderId, String origClientOrderId);
 
     /**
+     * Cancel all active orders.
+     *
+     * @return ResponseResult.
+     */
+    ResponseResult cancelAllOpenOrders(String symbol);
+    
+    /**
      * Switch position side. (true == dual, false == both)
      *
      * @return ResponseResult.

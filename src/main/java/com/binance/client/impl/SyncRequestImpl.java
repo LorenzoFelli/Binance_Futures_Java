@@ -105,6 +105,11 @@ public class SyncRequestImpl implements SyncRequestClient {
     }
 
     @Override
+    public ResponseResult cancelAllOpenOrders(String symbol) {
+        return RestApiInvoker.callSync(requestImpl.cancelAllOpenOrders(symbol));
+    }
+    
+    @Override
     public ResponseResult changePositionSide(boolean dual) {
         return RestApiInvoker.callSync(requestImpl.changePositionSide(dual));
     }
